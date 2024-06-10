@@ -1,0 +1,83 @@
+{% extends 'trade/main.html' %}
+{% block title %}
+Add Trade
+{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		.bt {
+			margin-bottom: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container mt-5" style="margin-bottom: 70px;">
+		<!-- Login form -->
+		<form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+			<h1 style="text-align: center;"><span style="color: green;">Add Trade</span></h1>
+
+			{% csrf_token %} <!-- CSRF token for security -->
+
+			<!-- Login heading -->
+			<hr>
+
+			<!-- Username input field -->
+			<div class="form-group">
+				<label for="exampleInputEmail1">Lot</label>
+				<input type="text" class="form-control" name="lot" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="Enter lot" required>
+			</div>
+            <div class="form-group">
+				<label for="exampleInputEmail1">Total Money</label>
+				<input type="text" class="form-control" name="total_money" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="Enter Total Money" required>
+			</div>
+            <div class="form-group">
+				<label for="exampleInputEmail1">Profit Or Loss</label>
+				<input type="text" class="form-control" name="profit_or_loss" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="" required>
+			</div>
+			<div class="form-group">
+                <label for="day">Day</label>
+                <select class="form-control" name="day" id="day" required>
+                    <option value="">Choose Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="result">Result</label>
+                <select class="form-control" name="result" id="result" required>
+                    <option value="">Choose Result</option>
+                    <option value="Success">Success</option>
+                    <option value="Failed">Failed</option>
+                </select>
+            </div>
+            <!-- <div class="form-group">
+				<label for="exampleInputEmail1">Result</label>
+				<input type="text" class="form-control" name="result" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="Enter lot" required>
+			</div>
+            <div class="form-group">
+				<label for="exampleInputEmail1">Day</label>
+				<input type="text" class="form-control" name="day" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="Enter day" required>
+			</div> -->
+
+			<!-- Submit button -->
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
+{% endblock %}

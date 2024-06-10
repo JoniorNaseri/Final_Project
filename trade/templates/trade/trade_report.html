@@ -1,0 +1,59 @@
+{% extends 'trade/main.html' %}
+{% block title %}
+Trades Information
+{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <style>
+        .content {
+            text-align: center;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اطلاعات معاملات</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Ux0OGiYk2D6uV9m1iE5j5cn21xHS5xG3b5M4hEysoP5t2680A7x8l+kX5i" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 style="text-align: center;">اطلاعات معاملات</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">مقدار پول اولیه</th>
+                    <th scope="col">کل سرمایه</th>
+                    <th scope="col">درصد رشد حساب</th>
+                    <th scope="col">سود / زیان</th>
+                    <th scope="col">تعداد کل معاملات</th>
+                    <th scope="col">درصد برد</th>
+                    <th scope="col">تعداد معاملات برنده</th>
+                    <th scope="col">تعداد معاملات بازنده</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="content">{{ primary_money }}</td>
+                    <td class="content">{{ total_money }}</td>
+                    {% if total_money > primary_money %}
+                        <td class="content">{{ percent_growth }} %</td>
+                        <td class="content">{{ profit }} $</td>
+                    {% else %}
+                        <td class="content"> {{ percent_growth }} %</td>
+                        <td class="content"> {{ profit }} $</td>
+                    {% endif %}
+                    <td class="content">{{ total_trades }}</td>
+                    <td class="content">{{ winrate }}</td>
+                    <td class="content">{{ win_trades }}</td>
+                    <td class="content">{{ lose_trades }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

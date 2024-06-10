@@ -1,0 +1,81 @@
+{% extends 'history/main.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="static/css/main.css">
+</head>
+
+<div>
+  <div class="whole">
+    <h4 style="margin-top: 10px;">Filter Trades</h4>
+    <form method="GET" action=".">
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="inputEmail4">Result</label>
+            <select name="trade_result" class="form-control">
+              <option value="SUCCESS,FAILED">همه</option>
+              <option value="SUCCESS" class="text-success">موفق</option>
+              <option value="FAILED" class="text-danger">ناموفق</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+          </div>
+    </form>
+  </div>
+  <div>
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+              <th class="col-md-1">تاریخ</th>
+              <th class="col-md-3">نوع معامله</th>
+              <th class="col-md-2">نتیجه معامله</th>
+              <th class="col-md-2">سود/زیان</th>
+              <th class="col-md-2">جزئیات</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for trade in page_obj %}
+                  <tr class="justify-content-center text-white">
+                    <td class="text-dark">{{ trade.created_at }}</td>
+                      <td class="text-dark">{{ trade.trade_type }}</td>
+
+                      {% if trade.trade_result == "SUCCESS" %}
+                        <td class="text-success ss">{{ trade.trade_result }}</td>
+                      {% else %}
+                        <td class="text-danger ss">{{ trade.trade_result}}</td>
+                      {% endif %}
+                      <td class="text-dark">{{ trade.profit_or_loss }}</td> 
+                      <td class="justify-content-center">
+                        <a class="text-decoration-none font-weight-bold text-dark" href="{{ trade.get_absolute_url }}">See more</a>
+                      </td>
+                  </tr>
+          {% endfor %}
+      </tbody>   
+  </table>
+  </div>
+</div>
+<div class="mb-3 ml-3" style="width: 50%; margin: auto;">
+  {% if is_paginated %}
+      {% if page_obj.has_previous %}
+          <a class="btn btn-outline-dark" href="?page=1">First</a>
+          <a class="btn btn-outline-dark" href="?page={{page_obj.previous_page_number}}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+              <a class="btn btn-dark" href="?page={{num}}">{{num}}</a>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <a class="btn btn-outline-dark" href="?page={{num}}">{{num}}</a>
+          {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+          <a class="btn btn-outline-dark" href="?page={{page_obj.next_page_number}}">Next</a>
+          <a class="btn btn-outline-dark" href="?page={{page_obj.paginator.num_pages}}">Last</a>
+      {% endif %}
+
+  {% endif %}
+</div>
+{% endblock %}

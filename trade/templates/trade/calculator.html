@@ -1,0 +1,42 @@
+{% extends 'trade/main.html' %}
+{% block title %}
+Lot Calculator
+{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container mt-5">
+		<!-- <-- Login form -->
+		<form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data" style="border-color: black; border-width: 2px;">
+
+			{% csrf_token %} <!-- CSRF token for security -->
+
+			<!-- Username input field -->
+			<div class="form-group">
+				<label for="exampleInputEmail1">Amount</label>
+				<input type="number" class="form-control" name="amount" id="exampleInputEmail1" aria-describedby="emailHelp"
+					placeholder="" required>
+			</div>
+
+			<!-- Password input field -->
+			<div class="form-group">
+				<label for="exampleInputPassword1">Loss Dollar</label>
+				<input type="number" name="loss_dollar" class="form-control" id="exampleInputPassword1" placeholder="" required>
+			</div>
+			<!-- Submit button -->
+			<button type="submit" class="btn btn-primary">Calculate</button>
+            <div class="form-group" style="padding-top: 30px;">
+				<label for="exampleInputPassword1"><span style="font-weight: bolder; font-size: 100px; margin-left: 150px; color: rgb(9, 1, 61);">{{lot}}</span></label>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+{% endblock %}

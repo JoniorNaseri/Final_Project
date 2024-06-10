@@ -1,0 +1,46 @@
+{% extends 'trade/main.html' %}
+{% block title %}
+All Trades
+{% endblock title %}
+{% block content %}
+{% load static %}
+{% if trades %}
+<table class="table">
+    <thead class="table-active">
+        <tr>
+            <th class="col-md-2">تاریخ</th>
+            <th class="col-md-1">روز</th>
+            <th class="col-md-1">کل پول</th>
+            <th class="col-md-1">لات</th>
+            <th class="col-md-2">سود/زیان</th>
+            <th class="col-md-1">نتیجه معامله</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for trade in trades %}
+                <tr class="justify-content-center text-white">
+                <td class="text-dark">{{ trade.created_at }}</td>
+                <td class="text-dark">{{ trade.day }}</td>
+                    <td class="text-dark">{{ trade.total_money }} $</td>
+                    <td class="text-dark">{{ trade.lot }}</td>
+                    {% if trade.result == "Success" %}
+                        <td class="text-success" style="font-weight: bold;">{{ trade.profit_or_loss }} $</td>
+                    {% else %}
+                        <td class="text-danger" style="font-weight: bold;">{{ trade.profit_or_loss }} $</td>
+                    {% endif %}
+                    {% if trade.result == "Success" %}
+                        <td class="text-success ss" style="font-weight: bold;">{{ trade.result }}</td>
+                    {% else %}
+                        <td class="text-danger ss" style="font-weight: bold;">{{ trade.result}}</td>
+                    {% endif %}
+                </tr>
+        {% endfor %}
+    </tbody>   
+</table>
+{% else %}
+<h1 style="text-align: center;">
+    There is no record yet!<br> Start your journey
+</h1>
+{% endif %}
+{% include 'trade/pagination.html' %}
+{% endblock %}

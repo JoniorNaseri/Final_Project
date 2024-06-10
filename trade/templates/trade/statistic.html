@@ -1,0 +1,38 @@
+{% extends 'trade/main.html' %}
+{% block title %}
+Data Chart
+{% endblock title %}
+{% block content %}
+    <style>
+        button {
+            background-color: rgb(3, 23, 33);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            height: 36px;
+            width: 175px;
+            font-weight: bold;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+
+        button:hover {
+            opacity: 0.8;
+            text-decoration: none;
+        }
+
+        button:active {
+            opacity: 0.5;
+            text-decoration: none;
+        }
+
+
+        
+    </style>
+
+    <img src="data:image/png;base64, {{chart|safe}}" alt="">
+    <button type="button">
+        <a style="text-decoration: none; color: white;" href="{% url 'analysis' %}">Link to Analyses</a>
+    </button>
+{% endblock %}
